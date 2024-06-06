@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             searchBox(),
-            ListView(),
+            //ListView()
           ],
         ),
       ),
