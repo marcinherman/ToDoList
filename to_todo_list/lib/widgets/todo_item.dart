@@ -4,7 +4,7 @@ import 'package:to_todo_list/models/todo.dart';
 
 class TodoItem extends StatelessWidget {
   final ToDo todo;
-  const TodoItem({Key? key, required this.todo}) : super(key: key);
+  const TodoItem({super.key, required this.todo});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,8 @@ class TodoItem extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         tileColor: Colors.white,
-        leading: const Icon(
-          Icons.check_box,
+        leading: Icon(
+          todo.isDone ? Icons.check_box : Icons.check_box_outline_blank,
           color: tdBlue,
         ),
         title: Text(
