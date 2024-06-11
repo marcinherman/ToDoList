@@ -1,28 +1,28 @@
-class Todo {
+class ToDo {
   String? id;
   String? todoText;
-  bool? isDone;
+  bool isDone;
 
-  Todo({
+  ToDo({
     required this.id,
     required this.todoText,
     this.isDone = false,
   });
 
-  static List<Todo> todoList() {
+  static List<ToDo> todoList() {
     return [
-      Todo(id: '01', todoText: 'Exercise', isDone: true),
-      Todo(id: '02', todoText: 'Shopping', isDone: true),
-      Todo(
+      ToDo(id: '01', todoText: 'Exercise', isDone: true),
+      ToDo(id: '02', todoText: 'Shopping', isDone: true),
+      ToDo(
         id: '03',
         todoText: 'Check Emails',
       ),
-      Todo(
+      ToDo(
         id: '04',
         todoText: 'Meeting',
       ),
-      Todo(id: '06', todoText: 'Work on mobile apps fot 2 hour'),
-      Todo(
+      ToDo(id: '06', todoText: 'Work on mobile apps fot 2 hour'),
+      ToDo(
         id: '07',
         todoText: 'Dinner with Jenny',
       )

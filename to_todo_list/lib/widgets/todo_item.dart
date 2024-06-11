@@ -3,9 +3,8 @@ import 'package:to_todo_list/constants/colors.dart';
 import 'package:to_todo_list/models/todo.dart';
 
 class TodoItem extends StatelessWidget {
-  TodoItem({super.key});
-
-  final todosList = Todo.totodoList();
+  final ToDo todo;
+  const TodoItem({Key? key, required this.todo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +17,17 @@ class TodoItem extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         tileColor: Colors.white,
-        leading: const Icon(Icons.check_box, color: tdBlue),
-        title: const Text(
-          'Check e-mail',
+        leading: const Icon(
+          Icons.check_box,
+          color: tdBlue,
+        ),
+        title: Text(
+          todo.todoText!,
           style: TextStyle(
-              fontSize: 16,
-              color: tdBlack,
-              decoration: TextDecoration.lineThrough),
+            fontSize: 16,
+            color: tdBlack,
+            decoration: todo.isDone ? TextDecoration.lineThrough : null,
+          ),
         ),
         trailing: Container(
           padding: const EdgeInsets.all(0),

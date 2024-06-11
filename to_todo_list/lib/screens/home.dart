@@ -5,7 +5,8 @@ import 'package:to_todo_list/widgets/todo_item.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
-  final todosList = Todo.totodoList();
+
+  final todosList = ToDo.todoList();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,10 @@ class Home extends StatelessWidget {
                           TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
                     ),
                   ),
-                  TodoItem(),
+                  for (ToDo todoo in todosList)
+                    TodoItem(
+                      todo: todoo,
+                    ),
                 ],
               ),
             )
