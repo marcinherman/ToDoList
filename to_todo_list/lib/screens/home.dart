@@ -1,3 +1,5 @@
+import 'dart:js_interop_unsafe';
+
 import 'package:flutter/material.dart';
 
 import 'package:to_todo_list/constants/colors.dart';
@@ -13,7 +15,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final todosList = ToDo.todoList();
+  List<ToDo> _foundToDo = [];
   final todoController = TextEditingController();
+  @override
+  void initState() {
+    _foundToDo = todosList;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +66,7 @@ class _HomeState extends State<Home> {
             child: Row(children: [
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.only(
+                  margin: EdgeInsets.only(
                     bottom: 20,
                     right: 20,
                     left: 20,
@@ -77,8 +85,8 @@ class _HomeState extends State<Home> {
                     ],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const TextField(
-                    controller: _todoController,
+                  child: TextField(
+                    controller: todoController,
                     decoration: InputDecoration(
                       hintText: 'Add a new todo Item',
                       border: InputBorder.none,
@@ -93,7 +101,9 @@ class _HomeState extends State<Home> {
                     '+',
                     style: TextStyle(fontSize: 40, color: Colors.white),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _addToDoItem(todoController.text);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: tdBlue,
                     minimumSize: const Size(60, 60),
@@ -127,6 +137,7 @@ class _HomeState extends State<Home> {
         todoText: toDo,
       ));
     });
+    todoController.clear();
   }
 
   Widget searchBox() {
