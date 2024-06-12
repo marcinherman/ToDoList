@@ -1,15 +1,17 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:to_todo_list/constants/colors.dart';
 import 'package:to_todo_list/models/todo.dart';
 import 'package:to_todo_list/widgets/todo_item.dart';
 
-class Home extends StatelessWidget {
-  Home({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final todosList = ToDo.todoList();
 
   @override
@@ -41,6 +43,8 @@ class Home extends StatelessWidget {
                       for (ToDo todoo in todosList)
                         TodoItem(
                           todo: todoo,
+                          onToDoChanged: _handleToDoChange,
+                          onDeleteItem: () {},
                         ),
                     ],
                   ),
@@ -81,16 +85,16 @@ class Home extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 20, right: 20),
+                margin: const EdgeInsets.only(bottom: 20, right: 20),
                 child: ElevatedButton(
-                  child: Text(
+                  child: const Text(
                     '+',
                     style: TextStyle(fontSize: 40, color: Colors.white),
                   ),
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: tdBlue,
-                    minimumSize: Size(60, 60),
+                    minimumSize: const Size(60, 60),
                     elevation: 10,
                   ),
                 ),
@@ -100,6 +104,12 @@ class Home extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _handleToDoChange(ToDo todo) {
+    setState(() {
+      todo.isDone = !todo.isDone;
+    });
   }
 
   Widget searchBox() {
