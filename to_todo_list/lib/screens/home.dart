@@ -1,5 +1,3 @@
-import 'dart:js_interop_unsafe';
-
 import 'package:flutter/material.dart';
 
 import 'package:to_todo_list/constants/colors.dart';
@@ -16,7 +14,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final todosList = ToDo.todoList();
   List<ToDo> _foundToDo = [];
-  final todoController = TextEditingController();
+  final _todoController = TextEditingController();
+
   @override
   void initState() {
     _foundToDo = todosList;
@@ -49,7 +48,7 @@ class _HomeState extends State<Home> {
                               fontSize: 30, fontWeight: FontWeight.w500),
                         ),
                       ),
-                      for (ToDo todoo in todosList)
+                      for (ToDo todoo in _foundToDo.reversed)
                         TodoItem(
                           todo: todoo,
                           onToDoChanged: _handleToDoChange,
@@ -66,7 +65,7 @@ class _HomeState extends State<Home> {
             child: Row(children: [
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     bottom: 20,
                     right: 20,
                     left: 20,
@@ -86,8 +85,8 @@ class _HomeState extends State<Home> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: TextField(
-                    controller: todoController,
-                    decoration: InputDecoration(
+                    controller: _todoController,
+                    decoration: const InputDecoration(
                       hintText: 'Add a new todo Item',
                       border: InputBorder.none,
                     ),
@@ -97,17 +96,17 @@ class _HomeState extends State<Home> {
               Container(
                 margin: const EdgeInsets.only(bottom: 20, right: 20),
                 child: ElevatedButton(
-                  child: const Text(
-                    '+',
-                    style: TextStyle(fontSize: 40, color: Colors.white),
-                  ),
                   onPressed: () {
-                    _addToDoItem(todoController.text);
+                    _addToDoItem(_todoController.text);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: tdBlue,
                     minimumSize: const Size(60, 60),
                     elevation: 10,
+                  ),
+                  child: const Text(
+                    '+',
+                    style: TextStyle(fontSize: 40, color: Colors.white),
                   ),
                 ),
               ),
@@ -137,7 +136,23 @@ class _HomeState extends State<Home> {
         todoText: toDo,
       ));
     });
-    todoController.clear();
+    _todoController.clear();
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<ToDo> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = todosList;
+    } else {
+      results = todosList
+          .where((item) => item.todoText!
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      _foundToDo = results;
+    });
   }
 
   Widget searchBox() {
@@ -147,8 +162,9 @@ class _HomeState extends State<Home> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: const TextField(
-        decoration: InputDecoration(
+      child: TextField(
+        onChanged: (value) => _runFilter(value),
+        decoration: const InputDecoration(
             contentPadding: EdgeInsets.all(0),
             prefixIcon: Icon(
               Icons.search,
