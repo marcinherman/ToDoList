@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -48,39 +50,52 @@ class Home extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                      bottom: 20,
-                      right: 20,
-                      left: 20,
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0.0, 0.0),
-                          blurRadius: 10.0,
-                          spreadRadius: 0.0,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Add a new todo Item',
-                        border: InputBorder.none,
+            child: Row(children: [
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    bottom: 20,
+                    right: 20,
+                    left: 20,
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 0.0),
+                        blurRadius: 10.0,
+                        spreadRadius: 0.0,
                       ),
+                    ],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Add a new todo Item',
+                      border: InputBorder.none,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 20, right: 20),
+                child: ElevatedButton(
+                  child: Text(
+                    '+',
+                    style: TextStyle(fontSize: 40, color: Colors.white),
+                  ),
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: tdBlue,
+                    minimumSize: Size(60, 60),
+                    elevation: 10,
+                  ),
+                ),
+              ),
+            ]),
           )
         ],
       ),
