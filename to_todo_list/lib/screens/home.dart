@@ -130,6 +130,10 @@ class _HomeState extends State<Home> {
   }
 
   void _addToDoItem(String toDo) {
+    if (toDo.trim().isEmpty) {
+      return;
+    }
+
     setState(() {
       todosList.add(ToDo(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
