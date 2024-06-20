@@ -33,19 +33,31 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             children: [
-              searchBox(),
+              _buildSearchBox(),
               Expanded(
-                child: ListView(
+                child: ListView.builder(
                   controller: _scrollController,
-                  children: [
-                    _buildListHeader(context),
-                    for (ToDo todoo in _foundToDo.reversed)
-                      TodoItem(
-                        todo: todoo,
-                        onToDoChanged: _handleToDoChange,
-                        onDeleteItem: _deleteToDoItem,
-                      ),
-                  ],
+                  itemCount: _foundToDo.length,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildListHeader(context),
+                          TodoItem(
+                            todo: _foundToDo[index],
+                            onToDoChanged: _handleToDoChange,
+                            onDeleteItem: _deleteToDoItem,
+                          ),
+                        ],
+                      );
+                    }
+                    return TodoItem(
+                      todo: _foundToDo[index],
+                      onToDoChanged: _handleToDoChange,
+                      onDeleteItem: _deleteToDoItem,
+                    );
+                  },
                 ),
               ),
               _buildNewItemInput(context),
@@ -101,7 +113,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  Widget searchBox() {
+  Widget _buildSearchBox() {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.white,
