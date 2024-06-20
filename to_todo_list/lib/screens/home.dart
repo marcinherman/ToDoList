@@ -38,24 +38,26 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
                   children: [
                     _buildListHeader(context),
                     Expanded(
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        controller: _scrollController,
-                        itemCount: _foundToDo.length,
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(height: 10);
-                        },
-                        itemBuilder: (context, index) {
-                          return TodoItem(
-                            todo: _foundToDo[index],
-                            onToDoChanged: _handleToDoChange,
-                            onDeleteItem: _deleteToDoItem,
-                          );
-                        },
+                      child: Material(
+                        color: tdBGColor,
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          controller: _scrollController,
+                          itemCount: _foundToDo.length,
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(height: 10);
+                          },
+                          itemBuilder: (context, index) {
+                            return TodoItem(
+                              todo: _foundToDo[index],
+                              onToDoChanged: _handleToDoChange,
+                              onDeleteItem: _deleteToDoItem,
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],
