@@ -29,23 +29,26 @@ class _HomeState extends State<Home> {
       appBar: _buildAppBar(),
       body: Stack(
         children: [
-          Container(
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 searchBox(),
                 Expanded(
                   child: ListView(
+                    padding: const EdgeInsets.only(bottom: 80),
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(
+                      const Padding(
+                        padding: EdgeInsets.only(
                           top: 50,
                           bottom: 20,
                         ),
-                        child: const Text(
+                        child: Text(
                           'All Todos',
                           style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w500),
+                            fontSize: 30,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                       for (ToDo todoo in _foundToDo.reversed)
@@ -62,56 +65,61 @@ class _HomeState extends State<Home> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Row(children: [
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 20,
-                    right: 20,
-                    left: 20,
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(0.0, 0.0),
-                        blurRadius: 10.0,
-                        spreadRadius: 0.0,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 20,
+                      right: 20,
+                      left: 20,
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0.0, 0.0),
+                          blurRadius: 10.0,
+                          spreadRadius: 0.0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: TextField(
+                      controller: _todoController,
+                      decoration: const InputDecoration(
+                        hintText: 'Add a new todo Item',
+                        border: InputBorder.none,
                       ),
-                    ],
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextField(
-                    controller: _todoController,
-                    decoration: const InputDecoration(
-                      hintText: 'Add a new todo Item',
-                      border: InputBorder.none,
                     ),
                   ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20, right: 20),
-                child: ElevatedButton(
-                  onPressed: () {
-                    _addToDoItem(_todoController.text);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: tdBlue,
-                    minimumSize: const Size(60, 60),
-                    elevation: 10,
-                  ),
-                  child: const Text(
-                    '+',
-                    style: TextStyle(fontSize: 40, color: Colors.white),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 20, right: 20),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _addToDoItem(_todoController.text);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: tdBlue,
+                      minimumSize: const Size(60, 60),
+                      elevation: 10,
+                    ),
+                    child: const Text(
+                      '+',
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ]),
-          )
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -196,7 +204,7 @@ class _HomeState extends State<Home> {
           color: tdBlack,
           size: 30,
         ),
-        Container(
+        SizedBox(
             height: 40,
             width: 40,
             child: ClipRRect(
