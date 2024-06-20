@@ -32,32 +32,33 @@ class _HomeState extends State<Home> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
+            mainAxisSize: MainAxisSize.max,
             children: [
               _buildSearchBox(),
               Expanded(
-                child: ListView.builder(
-                  controller: _scrollController,
-                  itemCount: _foundToDo.length,
-                  itemBuilder: (context, index) {
-                    if (index == 0) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildListHeader(context),
-                          TodoItem(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    _buildListHeader(context),
+                    Expanded(
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        controller: _scrollController,
+                        itemCount: _foundToDo.length,
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(height: 10);
+                        },
+                        itemBuilder: (context, index) {
+                          return TodoItem(
                             todo: _foundToDo[index],
                             onToDoChanged: _handleToDoChange,
                             onDeleteItem: _deleteToDoItem,
-                          ),
-                        ],
-                      );
-                    }
-                    return TodoItem(
-                      todo: _foundToDo[index],
-                      onToDoChanged: _handleToDoChange,
-                      onDeleteItem: _deleteToDoItem,
-                    );
-                  },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
               _buildNewItemInput(context),
@@ -103,7 +104,7 @@ class _HomeState extends State<Home> {
       results = todosList;
     } else {
       results = todosList
-          .where((item) => item.todoText!
+          .where((item) => item.todoText
               .toLowerCase()
               .contains(enteredKeyword.toLowerCase()))
           .toList();
@@ -166,8 +167,6 @@ class _HomeState extends State<Home> {
   }
 
   Widget _buildNewItemInput(BuildContext context) {
-    // TODO(Marcin): Dodać padding do srodka textfielda, zeby tekst sie nie
-    // zaczynał przy samej krawędzi
     return Row(
       children: [
         Expanded(
