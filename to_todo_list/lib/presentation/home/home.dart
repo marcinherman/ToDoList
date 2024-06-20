@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:to_todo_list/constants/colors.dart';
-import 'package:to_todo_list/models/todo.dart';
-import 'package:to_todo_list/widgets/todo_item.dart';
+import 'package:to_todo_list/domain/entity/todo.dart';
+import 'package:to_todo_list/presentation/home/widget/todo_item.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
