@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:to_todo_list/constants/colors.dart';
 import 'package:to_todo_list/domain/entity/todo.dart';
@@ -125,20 +127,25 @@ class _HomeState extends State<Home> {
       child: TextField(
         onChanged: (value) => _runFilter(value),
         decoration: const InputDecoration(
-          contentPadding: EdgeInsets.all(0),
-          prefixIcon: Icon(
-            Icons.search,
-            color: tdBlack,
-            size: 20,
-          ),
-          prefixIconConstraints: BoxConstraints(
-            maxHeight: 20,
-            maxWidth: 25,
-          ),
-          border: InputBorder.none,
-          hintText: "Search",
-          hintStyle: TextStyle(color: tdGrey),
-        ),
+            prefixIcon: Padding(
+              padding: EdgeInsets.only(
+                left: 10,
+                right: 10,
+              ),
+              child: Icon(
+                Icons.search,
+                color: tdBlack,
+                size: 20,
+              ),
+            ),
+            prefixIconConstraints: BoxConstraints(
+              maxHeight: 20,
+              maxWidth: 35,
+            ),
+            border: InputBorder.none,
+            hintText: "Search",
+            hintStyle: TextStyle(color: tdGrey),
+            contentPadding: EdgeInsets.only(left: 20)),
       ),
     );
   }
@@ -189,6 +196,9 @@ class _HomeState extends State<Home> {
               controller: _todoController,
               decoration: const InputDecoration(
                 hintText: 'Add a new todo Item',
+                contentPadding: EdgeInsets.only(
+                  left: 20.0,
+                ),
                 border: InputBorder.none,
               ),
             ),
