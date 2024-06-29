@@ -1,7 +1,4 @@
-
 import 'package:flutter/material.dart';
-
-
 import 'package:to_todo_list/constants/colors.dart';
 import 'package:to_todo_list/domain/entity/todo.dart';
 import 'package:to_todo_list/presentation/home/widget/todo_item.dart';
@@ -31,51 +28,51 @@ class _HomeState extends State<Home> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      
-    child: Scaffold(
-      backgroundColor: tdBGColor,
-      appBar: _buildAppBar(),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _buildSearchBox(),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildListHeader(context),
-                    Expanded(
-                      child: Material(
-                        color: tdBGColor,
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          controller: _scrollController,
-                          itemCount: _foundToDo.length,
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(height: 10);
-                          },
-                          itemBuilder: (context, index) {
-                            return TodoItem(
-                              todo: _foundToDo[index],
-                              onToDoChanged: _handleToDoChange,
-                              onDeleteItem: _deleteToDoItem,
-                            );
-                          },
+      child: Scaffold(
+        backgroundColor: tdBGColor,
+        appBar: _buildAppBar(),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                _buildSearchBox(),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildListHeader(context),
+                      Expanded(
+                        child: Material(
+                          color: tdBGColor,
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            controller: _scrollController,
+                            itemCount: _foundToDo.length,
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(height: 10);
+                            },
+                            itemBuilder: (context, index) {
+                              return TodoItem(
+                                todo: _foundToDo[index],
+                                onToDoChanged: _handleToDoChange,
+                                onDeleteItem: _deleteToDoItem,
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              _buildNewItemInput(context),
-            ],
+                _buildNewItemInput(context),
+              ],
+            ),
           ),
         ),
       ),
-    ),);
+    );
   }
 
   void _handleToDoChange(ToDo todo) {
@@ -183,10 +180,8 @@ class _HomeState extends State<Home> {
   Widget _buildNewItemInput(BuildContext context) {
     return Row(
       children: [
-      
         Expanded(
           child: DecoratedBox(
-               
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
