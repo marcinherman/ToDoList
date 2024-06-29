@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 
 import 'package:to_todo_list/constants/colors.dart';
 import 'package:to_todo_list/domain/entity/todo.dart';
@@ -27,7 +27,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      
+    child: Scaffold(
       backgroundColor: tdBGColor,
       appBar: _buildAppBar(),
       body: SafeArea(
@@ -70,7 +75,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-    );
+    ),);
   }
 
   void _handleToDoChange(ToDo todo) {
@@ -178,8 +183,10 @@ class _HomeState extends State<Home> {
   Widget _buildNewItemInput(BuildContext context) {
     return Row(
       children: [
+      
         Expanded(
           child: DecoratedBox(
+               
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
