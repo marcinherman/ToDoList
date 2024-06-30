@@ -181,37 +181,50 @@ class _HomeState extends State<Home> {
     return Row(
       children: [
         Expanded(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0.0, 0.0),
-                  blurRadius: 10.0,
-                  spreadRadius: 0.0,
-                ),
-              ],
+          child: Padding(
+            padding: const EdgeInsets.only(
+              right: 10,
+              left: 10,
+              top: 10,
+              bottom: 10,
             ),
-            child: TextField(
-              controller: _todoController,
-              decoration: const InputDecoration(
-                hintText: 'Add a new todo Item',
-                contentPadding: EdgeInsets.only(
-                  left: 20.0,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 0.0),
+                    blurRadius: 10.0,
+                    spreadRadius: 0.0,
+                  ),
+                ],
+              ),
+              child: TextField(
+                controller: _todoController,
+                decoration: const InputDecoration(
+                  hintText: 'Add a new todo Item',
+                  contentPadding: EdgeInsets.only(
+                    left: 20.0,
+                  ),
+                  border: InputBorder.none,
                 ),
-                border: InputBorder.none,
               ),
             ),
           ),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(
+          width: 8,
+        ),
         ElevatedButton(
           onPressed: () => _addToDoItem(_todoController.text),
           style: ElevatedButton.styleFrom(
             backgroundColor: tdBlue,
-            minimumSize: const Size(60, 60),
+            minimumSize: const Size(
+              60,
+              60,
+            ),
             elevation: 10,
           ),
           child: const Text(
@@ -229,8 +242,8 @@ class _HomeState extends State<Home> {
   Widget _buildListHeader(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.only(
-        top: 50,
-        bottom: 20,
+        top: 10,
+        bottom: 10,
       ),
       child: Text(
         'All Todos',
